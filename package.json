@@ -17,7 +17,8 @@
   "keywords": [
     "redux",
     "rxjs",
-    "redux-observable"
+    "redux-observable",
+    "fetch"
   ],
   "license": "MIT",
   "bugs": {
