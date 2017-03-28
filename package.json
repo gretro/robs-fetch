@@ -1,0 +1,32 @@
+{
+  "name": "robs-fetch",
+  "version": "0.1.0",
+  "description": "Redux-Observable fetch",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gretro/robs-fetch.git"
+  },
+  "author": "Gabriel Lemire",
+  "keywords": [
+    "redux",
+    "rxjs",
+    "redux-observable"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gretro/robs-fetch/issues"
+  },
+  "homepage": "https://github.com/gretro/robs-fetch#readme",
+  "dependencies": {
+    "redux": "^3.0.0",
+    "rxjs": "^5.0.0"
+  },
+  "peerDependencies": {
+    "redux": "^3.0.0",
+    "rxjs": "^5.0.0"
+  }
+}
