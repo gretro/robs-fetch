@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gretro/robs-fetch.svg?branch=master)](https://travis-ci.org/gretro/robs-fetch)
+
 # Redux-Observable fetch (robs-fetch)
 Redux-Observable fetch (*robs-fetch*) is a set of redux actions as well as an Epic to allow you to make REST requests easily in a *redux-observable* setup.
 
