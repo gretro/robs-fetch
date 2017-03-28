@@ -129,3 +129,6 @@ typings/
 !.vscode/extensions.json
 
 # End of https://www.gitignore.io/api/visualstudiocode,node,intellij
+
+# Project ignores
+dist/
