@@ -132,3 +132,4 @@ typings/
 
 # Project ignores
 dist/
+**/*.orig
