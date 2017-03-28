@@ -15,3 +15,6 @@ All tests will be run as part of the build.
  - [ ] Create a basic `fetchEpic`.
  - [ ] Introduce the concept of busy action. 
  - [ ] Create options for `fetchEpic`.
+
+ ## License
+ MIT License. See LICENSE file for more details.
