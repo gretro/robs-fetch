@@ -5,9 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:src",
+    "build": "npm run clean && npm test && npm run build:src",
     "build:src": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:dev": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,21 @@
     "rxjs": "^5.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^19.2.2",
+    "jest": "^19.0.2",
     "rimraf": "^2.6.1",
+    "ts-jest": "^19.0.6",
     "typescript": "^2.2.2"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   }
 }
