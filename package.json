@@ -8,7 +8,7 @@
     "build": "npm run clean && npm test && npm run build:src",
     "build:src": "tsc",
     "test": "jest",
-    "test:dev": "jest --watch"
+    "test:dev": "jest --watchAll"
   },
   "repository": {
     "type": "git",
