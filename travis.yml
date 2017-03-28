@@ -1,0 +1,9 @@
+sudo: required
+
+language: typescript
+
+services:
+  - docker
+
+script:
+  - docker build -t gretro/robs-fetch .
