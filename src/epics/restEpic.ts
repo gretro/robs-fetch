@@ -1,9 +1,14 @@
 import { RestAction, RestResponseAction } from '../domain';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/catch';
 import { Action, Dispatch } from 'redux';
-import { Observable } from 'rxjs';
 import { REST_ACTION } from '../actions/restActions';
 
-const epic = (action$: Observable<Action>): Observable<Action> => {
+export const restEpic = (action$: Observable<Action>): Observable<Action> => {
     return action$
         .filter(action => action.type === REST_ACTION)
         .flatMap((action: RestAction<any>) => {
@@ -20,8 +25,8 @@ const epic = (action$: Observable<Action>): Observable<Action> => {
             return Observable.fromPromise(fetch(url, init))
                 .flatMap(fetchResponse => {
                     const responseActionPromise = fetchResponse.ok
-                        ? handleResponse(fetchResponse.json(), fetchResponse, action)
-                        : handleResponse(fetchResponse.text(), fetchResponse, action);
+                        ? handleResponse(getBodyBasedOnHeader(fetchResponse), false, fetchResponse, action)
+                        : handleResponse(getBodyBasedOnHeader(fetchResponse), true, fetchResponse, action);
 
                     return Observable.fromPromise(responseActionPromise);
                 })
@@ -31,7 +36,15 @@ const epic = (action$: Observable<Action>): Observable<Action> => {
         });
 }
 
-function handleResponse(dataHandle: Promise<any>, fetchResponse: Response, action: RestAction<any>): Promise<RestResponseAction<any, any>> {
+function getBodyBasedOnHeader(fetchResponse: Response): Promise<any> {
+    const contentType = fetchResponse.headers.get('content-type');
+
+    return contentType.toLowerCase().indexOf('application/json') > -1
+        ? fetchResponse.json()
+        : fetchResponse.text();
+}
+
+export function handleResponse(dataHandle: Promise<any>, error: boolean, fetchResponse: Response, action: RestAction<any>): Promise<RestResponseAction<any, any>> {
     const { onCompleteAction } = action.payload;
     const { status, statusText } = fetchResponse;
 
@@ -40,7 +53,7 @@ function handleResponse(dataHandle: Promise<any>, fetchResponse: Response, actio
             const responseAction: RestResponseAction<any, any> = {
                 type: onCompleteAction,
                 payload: data,
-                error: false,
+                error: error,
                 meta: {
                     request: action,
                     statusCode: status,
@@ -66,7 +79,7 @@ function handleResponse(dataHandle: Promise<any>, fetchResponse: Response, actio
         });
 }
 
-function handleNonResponse(error: any, action: RestAction<any>): RestResponseAction<any, any> {
+export function handleNonResponse(error: any, action: RestAction<any>): RestResponseAction<any, any> {
     return {
         type: action.payload.onCompleteAction,
         error: true,
