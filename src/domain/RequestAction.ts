@@ -75,4 +75,18 @@ export interface RestResponseMeta<T> {
      * Original action that triggered this response.
      */
     request: RestAction<T>
+
+    /**
+     * HTTP Status code returned with the Response.
+     * 
+     * May be undefined if the error occurred before there was a Response.
+     */
+    statusCode?: number;
+
+    /**
+     * HTTP Status text return with the Response.
+     * 
+     * May be undefined if the error occurred before there was a Response.
+     */
+    statusText?: string;
 }
