@@ -59,6 +59,10 @@
     "automock": false,
     "setupFiles": [
       "./tests/setupJest.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/samples/"
     ]
   }
 }
