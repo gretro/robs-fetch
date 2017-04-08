@@ -19,7 +19,7 @@ function handlePeopleRetrieved(state, action) {
     return {
       ...state,
       people: null,
-      error: action.payload
+      error: getErrorDescription(action.payload)
     };
   }
 
@@ -30,3 +30,8 @@ function handlePeopleRetrieved(state, action) {
   };
 }
 
+function getErrorDescription(error) {
+  return (error && typeof error === 'string')
+    ? error
+    : 'An unknown error occurred.';
+}
