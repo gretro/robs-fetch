@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { restActions } from 'robs-fetch';
+import { restActions } from 'robs-fetch'; // Importing restActions.
 import './App.css';
 import reactLogo from './logo.svg';
 import robsLogo from './logo-small.gif';
@@ -52,6 +52,8 @@ class App extends React.Component {
 }
 
 function fetchPeople() {
+  // This will dispatch an action to execute a REST Action
+  // with the GET method.
   return restActions.fetchGet({
     url: '/api/people',
     onCompleteAction: 'PEOPLE_RETRIEVED' 

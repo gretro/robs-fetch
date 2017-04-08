@@ -14,6 +14,7 @@ export const reducer = (state = initialState, action) => {
   return newState;
 }
 
+// Handling the response of the REST Action.
 function handlePeopleRetrieved(state, action) {
   if (action.error) {
     return {
