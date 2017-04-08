@@ -1,0 +1,1 @@
+export { AppConnected } from './App';

@@ -41,7 +41,7 @@ export const injectableEpic = (fetch: Fetch, action$: Observable<Action>): Obser
 export const restEpic = injectableEpic.bind(null, window.fetch);
 
 function getBodyBasedOnHeader(fetchResponse: Response): Promise<any> {
-  const contentType = fetchResponse.headers.get('content-type');
+  const contentType = fetchResponse.headers.get('content-type') || '';
 
   return contentType.toLowerCase().indexOf('application/json') > -1
     ? fetchResponse.json()
