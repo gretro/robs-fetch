@@ -2,8 +2,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { restActions } from 'robs-fetch';
-import logo from './logo.svg';
 import './App.css';
+import reactLogo from './logo.svg';
+import robsLogo from './logo-small.gif';
+
 
 class App extends React.Component {
   render() {
@@ -13,8 +15,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <img src={reactLogo} className="App-logo" alt="React Logo" />
+          <img src={robsLogo} className="App-logo" alt="Redux-Observable logo" />
+          <h2>Redux-Observable Fetch example</h2>
         </div>
         <p className="App-intro">
           <button onClick={ping}>Send PING action.</button>
