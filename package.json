@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && npm test && npm run build:src",
+    "lint": "tslint --project tsconfig.json --config tslint.json --type-check",
+    "build": "npm run clean && npm run lint && npm test && npm run build:src",
     "build:src": "tsc",
     "test": "jest",
     "test:dev": "jest --watchAll"
@@ -35,13 +36,15 @@
     "rxjs": "^5.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^19.2.2",
-    "jest": "^19.0.2",
-    "jest-fetch-mock": "^1.0.8",
-    "rimraf": "^2.6.1",
-    "ts-jest": "^19.0.6",
-    "typescript": "^2.2.2",
-    "xml-js": "^1.0.2"
+    "@types/jest": "19.2.2",
+    "jest": "19.0.2",
+    "jest-fetch-mock": "1.0.8",
+    "rimraf": "2.6.1",
+    "ts-jest": "19.0.6",
+    "tslint": "5.0.0",
+    "tslint-config-standard": "5.0.2",
+    "typescript": "2.2.2",
+    "xml-js": "1.0.2"
   },
   "jest": {
     "transform": {

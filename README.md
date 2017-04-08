@@ -13,8 +13,8 @@ It standardise the approach one may use to make *fetch* requests in an elegant f
 All tests will be run as part of the build.
 
 ## Roadmap
- - [ ] Setup tests using Jest.
- - [ ] Create a basic `fetchEpic`.
+ - [x] Setup tests using Jest.
+ - [x] Create a basic `fetchEpic`.
  - [ ] Introduce the concept of busy action. 
  - [ ] Create options for `fetchEpic`.
 
