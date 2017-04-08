@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 
-export class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <div className="App">
@@ -11,9 +13,17 @@ export class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          <button onClick={this.props.ping}>Send PING action.</button>
         </p>
       </div>
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    ping: bindActionCreators(() => { return { type: 'PING' }; }, dispatch)
+  };
+}
+
+export const AppConnected = connect(undefined, mapDispatchToProps)(App);
