@@ -8,14 +8,19 @@
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
     "redux-observable": "^0.14.1",
-    "rxjs": "^5.3.0",
-    "robs-fetch": "file:../.."
+    "robs-fetch": "file:../..",
+    "rxjs": "^5.3.0"
   },
   "devDependencies": {
+    "concurrently": "^3.4.0",
+    "express": "^4.15.2",
+    "nodemon": "^1.11.0",
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run server\" \"npm run frontend\"",
+    "server": "nodemon server/index.js",
+    "frontend": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

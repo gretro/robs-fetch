@@ -7,9 +7,8 @@ import './App.css';
 
 class App extends React.Component {
   render() {
-    const { renderPeople } = this;
     const { ping, fetchPeople, error, people } = this.props;
-    const peopleContent = renderPeople(people);
+    const peopleContent = this.renderPeople(people);
 
     return (
       <div className="App">
@@ -57,10 +56,10 @@ function fetchPeople() {
 }
 
 function mapStateToProps(store) {
-  const { users, error } = store;
+  const { people, error } = store;
 
   return {
-    users,
+    people,
     error
   };
 }
