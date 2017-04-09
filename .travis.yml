@@ -7,6 +7,8 @@ services:
 
 script:
   - docker build -t gretro/robs-fetch .
+  - docker run --name robs-fetch-build gretro/robs-fetch
+  - ./deploy.sh
 
 notifications:
   email:

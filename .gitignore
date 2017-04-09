@@ -133,3 +133,4 @@ typings/
 # Project ignores
 dist/
 **/*.orig
+build_result/

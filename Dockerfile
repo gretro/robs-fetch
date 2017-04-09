@@ -3,5 +3,6 @@ FROM node:6.10.1-alpine
 WORKDIR /robs-fetch
 COPY . .
 
-RUN npm install && \
-    npm run build
+RUN npm install
+
+CMD npm run build

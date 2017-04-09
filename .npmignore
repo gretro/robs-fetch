@@ -3,6 +3,9 @@ tests/
 src/
 .vscode/
 .travis.yml
+.gitignore
+deploy.sh
 Dockerfile
-yarn.lock
+tsconfig.json
 tslint.json
+yarn.lock
