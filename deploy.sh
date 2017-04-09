@@ -1,5 +1,3 @@
-echo "${TRAVIS_TAG}"
-echo "${TRAVIS_BRANCH}"
 if [ ${TRAVIS_TAG} ] && [ "${TRAVIS_BRANCH}" = "master" ] && [ ${NPM_TOKEN} ]
 then
   docker cp robs-fetch-build:/robs-fetch ./build_result
