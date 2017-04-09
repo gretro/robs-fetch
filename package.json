@@ -1,6 +1,6 @@
 {
   "name": "robs-fetch",
-  "version": "0.0.1-BUILD",
+  "version": "0.0.0",
   "description": "Redux-observable fetch (robs-fetch) is an epic for redux-observable to allow you to make fetch requests easily in a standard, easy and elegant way.",
   "main": "dist/index.js",
   "scripts": {
