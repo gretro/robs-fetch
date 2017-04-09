@@ -2,7 +2,7 @@
 [![robs-fetch](https://img.shields.io/npm/v/robs-fetch.svg)](https://www.npmjs.com/package/robs-fetch)
 
 # Redux-Observable fetch (robs-fetch)
-Redux-Observable fetch (*robs-fetch*) is a set of redux actions as well as an Epic to allow you to make REST requests easily in a *redux-observable* setup.
+Redux-observable fetch (*robs-fetch*) is a set of redux actions as well as an Epic to allow you to make REST requests easily in a *redux-observable* setup.
 
 It standardise the approach one may use to make *fetch* requests in an elegant fashion.
 
@@ -18,6 +18,7 @@ All tests will be run as part of the build.
  - [x] Create a basic `fetchEpic`.
  - [ ] Introduce the concept of busy action. 
  - [ ] Create options for `fetchEpic`.
+ - [ ] Allow to define custom headers on a per-request basis.
 
 ## How to install in your project
 ```
