@@ -1,1 +1,1 @@
-export { restEpic } from './restEpic';
+export { restEpic, createRestEpic, defaultOptions } from './restEpic';
