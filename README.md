@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/gretro/robs-fetch.svg?branch=master)](https://travis-ci.org/gretro/robs-fetch)
+[![robs-fetch](https://img.shields.io/npm/v/robs-fetch.svg)](https://www.npmjs.com/package/robs-fetch)
 
 # Redux-Observable fetch (robs-fetch)
 Redux-Observable fetch (*robs-fetch*) is a set of redux actions as well as an Epic to allow you to make REST requests easily in a *redux-observable* setup.
@@ -82,6 +83,9 @@ const reducer = (state, action) => {
   return state;
 };
 ```
+
+## Examples
+Examples of usage for `robs-fetch` can be found under the *samples* folder.
 
 ## License
  MIT License. See LICENSE file for more details.

@@ -1,6 +1,6 @@
 {
   "name": "robs-fetch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Redux-Observable fetch",
   "main": "dist/index.js",
   "scripts": {
