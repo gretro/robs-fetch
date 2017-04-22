@@ -1,4 +1,3 @@
-import { RestAction, RestResponseAction } from '../domain';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromPromise';
@@ -6,11 +5,18 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import { Action, Dispatch } from 'redux';
+import { RestAction, RestResponseAction, RestEpicOptions } from '../domain';
 import { REST_ACTION } from '../actions/restActions';
 
 type Fetch = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
+export type RestEpic = (action$: Observable<Action>) => Observable<Action>;
 
-export const injectableEpic = (fetch: Fetch, action$: Observable<Action>): Observable<Action> => {
+export const defaultOptions: RestEpicOptions = {
+  headers: { },
+  credentials: 'omit'
+};
+
+export const injectableEpic = (fetch: Fetch, options: RestEpicOptions, action$: Observable<Action>): Observable<Action> => {
   return action$
     .filter(action => action.type === REST_ACTION)
     .flatMap((action: RestAction<any>) => {
@@ -19,7 +25,9 @@ export const injectableEpic = (fetch: Fetch, action$: Observable<Action>): Obser
       const init: RequestInit = {
         method,
         body,
+        credentials: options.credentials,
         headers: new Headers({
+          ...options.headers,
           'Content-Type': 'application/json; charset=utf-8'
         })
       };
@@ -38,7 +46,24 @@ export const injectableEpic = (fetch: Fetch, action$: Observable<Action>): Obser
     });
 };
 
-export const restEpic = injectableEpic.bind(null, window.fetch);
+/**
+ * Rest Epic with default options.
+ */
+export const restEpic: RestEpic = injectableEpic.bind(null, window.fetch, defaultOptions);
+
+/**
+ * Creates a Rest Epic with the specified options.
+ *
+ * @param options Options to apply to the Fetch requests.
+ */
+export function createRestEpic(options: RestEpicOptions): RestEpic {
+  const mergedOptions = {
+    ...defaultOptions,
+    ...options
+  };
+
+  return injectableEpic.bind(null, window.fetch, mergedOptions);
+}
 
 function getBodyBasedOnHeader(fetchResponse: Response): Promise<any> {
   const contentType = fetchResponse.headers.get('content-type') || '';

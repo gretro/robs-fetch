@@ -16,9 +16,10 @@ All tests will be run as part of the build.
 ## Roadmap
  - [x] Setup tests using Jest.
  - [x] Create a basic `fetchEpic`.
+ - [x] Create options for `fetchEpic`.
  - [ ] Introduce the concept of busy action. 
- - [ ] Create options for `fetchEpic`.
- - [ ] Allow to define custom headers on a per-request basis.
+ - [ ] Allow to define options on a per-request basis.
+ - [ ] Ability to define custom serializers.
 
 ## How to install in your project
 ```
@@ -46,6 +47,22 @@ const rootEpic = combineEpics(
   restEpic
 );
 ```
+
+### Advanced setup
+The standard setup is quick and easy for simple cases. However, in real apps, you'll probably need more advanced options. These options can be set up at the epic construction for a global effect on all fetch requests. In a near future, you'll be able to set some options for a single request. Here is how to set it up.
+
+```
+import { createRestEpic } from 'robs-fetch';
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
+
+const fetchEpic = createRestEpic(options);
+
+// Apply epic to the redux-observable middleware (see redux-observable documentation).
+```
+
+#### Available Options
+ * `credentials`: Strategy for the credentials (cookies). See [fetch documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials) for possible values.
+ * `headers`: An object containing the header values.
 
 ### Typescript typings
 The Typescript typings are included inside the module. No need for external typings.

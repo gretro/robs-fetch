@@ -1,7 +1,7 @@
 import { Observable, Observer } from 'rxjs';
-import { restEpic } from './restEpic';
+import { createRestEpic, defaultOptions, injectableEpic, restEpic } from './restEpic';
 import { fetchGet } from '../actions';
-import { RestAction, RestResponseAction } from '../domain';
+import { RestAction, RestResponseAction, RestEpicOptions } from '../domain';
 import { testObservable } from '../../tests/utils';
 import { js2xml } from 'xml-js';
 
@@ -207,7 +207,7 @@ describe('restEpic', () => {
       // Assert
       testObservable(responseAction$, done, (responseAction: RestResponseAction<any, any>) => {
         expect(responseAction.type).toEqual(onCompleteAction);
-        expect(responseAction.error).toBeTruthy();
+        expect(responseAction.error).toEqual(true);
         expect(responseAction.payload).toBeInstanceOf(Error);
         expect(responseAction.meta.request).toEqual(restAction);
         expect(responseAction.meta.statusCode).toEqual(status);
@@ -216,5 +216,55 @@ describe('restEpic', () => {
     });
   });
 
-  // TODO: Unit tests when fetch breaks due to network issues.
+  describe('when fetch rejects the promise', () => {
+    it('should dispatch error action', (done) => {
+      // Arrange
+      const action$ = Observable.of(restAction);
+      const error = new Error('error');
+      const mockFetch = () => {
+        return Promise.reject(error);
+      };
+
+      // Act
+      const epic = injectableEpic(mockFetch, defaultOptions, action$);
+
+      // Assert
+      testObservable(epic, done, (responseAction: RestResponseAction<any, any>) => {
+        expect(responseAction.type).toEqual(onCompleteAction);
+        expect(responseAction.error).toEqual(true);
+        expect(responseAction.payload).toEqual(error);
+        expect(responseAction.meta.request).toEqual(restAction);
+        expect(responseAction.meta.statusCode).toBeUndefined();
+        expect(responseAction.meta.statusText).toBeUndefined();
+      });
+    });
+  });
+
+  describe('When creating RestEpic with custom options', () => {
+    it('should send relevant options to fetch API', () => {
+      // Arrange
+      const action$ = Observable.of(restAction);
+      const options: RestEpicOptions = {
+        credentials: 'include',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      };
+      const mockFetch = (request: RequestInfo, init: RequestInit) => {
+        // Assert
+        expect(init.credentials).toEqual(options.credentials);
+        expect(init.headers.get('X-Requested-With')).toEqual(options.headers['X-Requested-With']);
+
+        return Promise.reject('test');
+      };
+
+      // Act
+      const epic = injectableEpic(mockFetch, options, action$);
+
+      // Assert
+      epic
+        .take(1)
+        .subscribe();
+    });
+  });
 });

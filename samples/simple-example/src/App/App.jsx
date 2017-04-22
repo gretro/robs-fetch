@@ -1,5 +1,4 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { restActions } from 'robs-fetch'; // Importing restActions.
 import './App.css';
@@ -69,11 +68,9 @@ function mapStateToProps(store) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    ping: bindActionCreators(() => { return { type: 'PING' }; }, dispatch),
-    fetchPeople: bindActionCreators(fetchPeople, dispatch)
-  };
-}
+const dispatchProps = {
+  ping: () => ({ type: 'PING' }),
+  fetchPeople
+};
 
-export const AppConnected = connect(mapStateToProps, mapDispatchToProps)(App);
+export const AppConnected = connect(mapStateToProps, dispatchProps)(App);
