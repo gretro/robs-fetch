@@ -1,5 +1,4 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { restActions } from 'robs-fetch'; // Importing restActions.
 import './App.css';

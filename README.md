@@ -60,7 +60,7 @@ const fetchEpic = createRestEpic(options);
 // Apply epic to the redux-observable middleware (see redux-observable documentation).
 ```
 
-#### Options
+#### Available Options
  * `credentials`: Strategy for the credentials (cookies). See [fetch documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials) for possible values.
  * `headers`: An object containing the header values.
 
