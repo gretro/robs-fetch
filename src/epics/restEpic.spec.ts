@@ -246,14 +246,14 @@ describe('restEpic', () => {
       const action$ = Observable.of(restAction);
       const options: RestEpicOptions = {
         credentials: 'include',
-        defaultHeaders: {
+        headers: {
           'X-Requested-With': 'XMLHttpRequest'
         }
       };
       const mockFetch = (request: RequestInfo, init: RequestInit) => {
         // Assert
         expect(init.credentials).toEqual(options.credentials);
-        expect(init.headers.get('X-Requested-With')).toEqual(options.defaultHeaders['X-Requested-With']);
+        expect(init.headers.get('X-Requested-With')).toEqual(options.headers['X-Requested-With']);
 
         return Promise.reject('test');
       };

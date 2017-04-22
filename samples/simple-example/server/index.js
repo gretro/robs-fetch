@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 
 app.get('/api/people', (req, res) => {
+  console.log('Requested with: ', req.header('X-Requested-With'));
+
   return res.send([
     {
       id: 1,

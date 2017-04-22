@@ -12,7 +12,7 @@ type Fetch = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
 export type RestEpic = (action$: Observable<Action>) => Observable<Action>;
 
 export const defaultOptions: RestEpicOptions = {
-  defaultHeaders: { },
+  headers: { },
   credentials: 'omit'
 };
 
@@ -27,7 +27,7 @@ export const injectableEpic = (fetch: Fetch, options: RestEpicOptions, action$: 
         body,
         credentials: options.credentials,
         headers: new Headers({
-          ...options.defaultHeaders,
+          ...options.headers,
           'Content-Type': 'application/json; charset=utf-8'
         })
       };

@@ -2,7 +2,7 @@ export interface RestEpicOptions {
   /**
    * Headers to include in each request.
    */
-  defaultHeaders?: { [key: string]: any };
+  headers?: { [key: string]: any };
 
   /**
    * Determines the credentials behavior.
