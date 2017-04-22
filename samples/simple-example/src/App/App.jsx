@@ -68,9 +68,9 @@ function mapStateToProps(store) {
   };
 }
 
-const dispatcher = {
+const dispatchProps = {
   ping: () => ({ type: 'PING' }),
   fetchPeople
 };
 
-export const AppConnected = connect(mapStateToProps, dispatcher)(App);
+export const AppConnected = connect(mapStateToProps, dispatchProps)(App);
